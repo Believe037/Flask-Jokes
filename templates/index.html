@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jokes Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+      <div class="card">
+        <center>
+          <div class="heading">
+            <div class="img-div">
+              <img src="{{ url_for('static', filename='./images/laughing.png')}}" alt="laughing"/>
+            </div>
+              <h1>Jokes App by Believe</h1>
+          </div>
+          <div class="main">
+            <button onclick="generate_joke()" class="generate-btn">Generate Joke &#128540;</button>
+            <div class="joke">
+              <p id="joke"></p>
+            </div>
+          </div>
+        </center>
+        
+      </div>
+
+    </div>
+
+    
+    <footer>
+      <div class="content">
+        <center>
+          <div class="social">
+            <a href="https://www.linkedin.com/in/okelekebelieve/" target="_blank">LinkedIn<i class="fa-brands fa-linkedin"></i></a>
+          </div>
+          <small>&copy; <span>2023 App Created by Engr. Believe Okeleke</span></small>
+        </center>
+      </div>
+    </footer>
+    
+
+    <script src="https://cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js"></script>
+    <script>
+
+      generateBtn = document.querySelector('.generate-btn');
+      let emoji = String.fromCodePoint(0x1F602); 
+      
+
+      function generate_joke(){
+        fetch('/generate_joke')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('joke').textContent = data;
+        })
+
+        generateBtn.innerText = "Generate Another Joke 😉"
+      }
+
+      generateBtn.addEventListener("click", function() {
+        generateBtn.textContent = "Generate Anohter Joke " + emoji;
+      });
+    </script>
+</body>
+</html>
